@@ -1,0 +1,8 @@
+<?page title="Error" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window xmlns:n="native" title="Error" border="normal">
+ERROR!!!
+<n:br></n:br>
+<n:a href="/main">Main</n:a>
+</window>
+</zk>

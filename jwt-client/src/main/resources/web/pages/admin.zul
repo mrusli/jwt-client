@@ -1,0 +1,6 @@
+<?page title="Admin" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window title="Admin" border="normal">
+ADMIN !!!
+</window>
+</zk>

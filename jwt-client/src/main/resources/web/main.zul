@@ -1,0 +1,14 @@
+<?page title="Main" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window xmlns:n="native" title="Main" border="normal">
+	MAIN !!!
+	<n:br/>
+	<n:a href="/user">User Page</n:a>
+	<n:br/>
+	<n:a href="/admin">Admin Page</n:a>
+	<n:br/>
+	<n:a href="/mod">Moderator Page</n:a>
+	<n:br/>
+	<n:a href="/logout">Logout</n:a>
+</window>
+</zk>

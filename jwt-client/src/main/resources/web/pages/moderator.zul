@@ -1,0 +1,6 @@
+<?page title="Moderator" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window title="Moderator" border="normal">
+MODERATOR !!!
+</window>
+</zk>
