@@ -20,6 +20,8 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.pyramix.web.model.User;
 
+import jakarta.servlet.http.HttpServletResponse;
+
 @Controller
 public class LoginController {
 
@@ -35,9 +37,10 @@ public class LoginController {
 	
 	@SuppressWarnings("serial")
 	@PostMapping("/authLogin")
-	public String authLogin(@RequestParam String username, @RequestParam String password) throws IOException, InterruptedException {
-		log.info("username : "+username);
-		log.info("password : "+password);
+	public String authLogin(@RequestParam String username, @RequestParam String password) 
+				throws IOException, InterruptedException {
+		log.info("username : "+ (username.isBlank() ? "no_value" : username));
+		log.info("password : "+ (password.isBlank() ? "no_value" : password));
 		
 		var values = new HashMap<String, String>() {
 			{
@@ -59,8 +62,13 @@ public class LoginController {
 		
 		response = 
 				client.send(request, HttpResponse.BodyHandlers.ofString());
-		
-		log.info("response : "+response.body());
+		log.info("response : "+(response.body().toString().isBlank() ? "no body" : response.body().toString()));
+		if (response.body().toString().isBlank()) {
+			return "redirect:/login?error=true";
+		}
+		if (response.statusCode()==HttpServletResponse.SC_BAD_REQUEST) {
+			return "redirect:/login?error=true";
+		} 
 		
 		return "redirect:/success";
 	}
@@ -71,11 +79,11 @@ public class LoginController {
 		User userLogin =
 				gson.fromJson(response.body(), User.class);
 		
-		log.info(userLogin.toString());
+		log.info("Login Success : "+userLogin.toString());
 		
+		// so that PageController will be able to 'see' userLogin
 		redirectAttributes.addFlashAttribute("userLogin", userLogin);
 		
 		return "redirect:/main";
 	}
-	
 }
